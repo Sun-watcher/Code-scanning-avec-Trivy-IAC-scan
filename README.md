@@ -8,7 +8,6 @@ Ce dépôt contient un exemple d'analyse de code **Infrastructure-as-Code (IaC)*
 
 - `main.tf` : Exemple de configuration Terraform créant un bucket S3 AWS.
 - `.github/workflows/trivy-iac-scan.yml` : Workflow GitHub Actions exécutant Trivy pour analyser les fichiers IaC à chaque push ou pull request.
-- `README.md` : Ce fichier.
 
 ---
 

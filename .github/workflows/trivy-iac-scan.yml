@@ -1,0 +1,34 @@
+name: Trivy IaC Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  
+
+jobs:
+  trivy-iac-scan:
+    name: Scan Infrastructure as Code with Trivy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          ignore-unfixed: true
+          format: 'table'
+          exit-code: '1'
+          severity: 'HIGH,CRITICAL'
+          scan-ref: '.'
+
+      - name: Upload Trivy report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-iac-report
+          path: trivy-report.txt
